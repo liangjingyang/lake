@@ -1,4 +1,4 @@
 #!/bin/sh
-source ./scripts/compile-plugins.sh
-source ./scripts/export-env.sh
+./scripts/compile-plugins.sh
+./scripts/export-env.sh
 go test -v ./test/...

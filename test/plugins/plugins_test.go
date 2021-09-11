@@ -1,18 +1,16 @@
 package plugins
 
 import (
-	"path"
-	"runtime"
-	"strings"
 	"testing"
-
+	"runtime"
+	"path/filepath"
 	"github.com/merico-dev/lake/plugins"
 )
 
 func TestPluginsLoading(t *testing.T) {
-	_, filename, _, _ := runtime.Caller(0)
-	pluginsDir := strings.Replace(path.Dir(filename), `test/`, ``, 1)
-	err := plugins.LoadPlugins(pluginsDir)
+	_, path, _, _ := runtime.Caller(0)
+	pluginDir := filepath.Join(filepath.Dir(path), "..", "..", "bin", "plugins")
+	err := plugins.LoadPlugins(pluginDir)
 	if err != nil {
 		t.Errorf("Failed to LoadPlugins %v", err)
 	}

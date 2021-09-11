@@ -5,11 +5,14 @@
 hello:
 	echo "Hello"
 
-build:
-	go build
+build-plugin:
+	@sh scripts/compile-plugins.sh
 
-dev:
-	@sh ./scripts/dev.sh
+build: build-plugin
+	go build -o bin/lake
+
+dev: build
+	bin/lake
 
 run:
 	go run main.go
@@ -38,3 +41,5 @@ e2e-test:
 lint:
 	golangci-lint run
 
+clean:
+	@rm -rf bin
